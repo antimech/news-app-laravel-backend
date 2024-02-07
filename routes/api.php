@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('articles', ArticleController::class)
-    ->only(['index']);
+    ->only(['index', 'show']);
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image');
             $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });
     }

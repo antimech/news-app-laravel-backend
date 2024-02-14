@@ -22,6 +22,10 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        $article->update([
+            'views' => $article->views + 1]
+        );
+
         return new ArticleResource($article);
     }
 }

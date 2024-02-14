@@ -22,9 +22,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $article->update([
-            'views' => $article->views + 1]
-        );
+        $article->increment('views');
 
         return new ArticleResource($article);
     }

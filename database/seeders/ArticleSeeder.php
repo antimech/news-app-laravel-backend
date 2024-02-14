@@ -18,7 +18,7 @@ class ArticleSeeder extends Seeder
         Storage::makeDirectory('public/images');
 
         User::factory(5)
-            ->has(Article::factory()->count(3))
+            ->has(Article::factory()->count(5))
             ->create();
     }
 }

@@ -17,4 +17,12 @@ class ArticleTest extends TestCase
 
         $this->assertTrue($article->author->id === $user->id);
     }
+
+    public function test_an_article_has_a_image_url(): void
+    {
+        $article = Article::factory()->create();
+        $expectedUrl = asset('storage/images/' . $article->image);
+
+        $this->assertSame($expectedUrl, $article->image_url);
+    }
 }

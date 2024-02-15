@@ -18,11 +18,14 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         $title = fake()->name();
+        $image = app()->environment('testing')
+            ? 'fake.jpg'
+            : fake()->image('storage/app/public/images', fullPath: false, word: $title);
 
         return [
             'title' => $title,
             'content' => fake()->paragraph(),
-            'image' => fake()->image('storage/app/public/images', fullPath: false, word: $title),
+            'image' => $image,
             'user_id' => User::factory()
         ];
     }

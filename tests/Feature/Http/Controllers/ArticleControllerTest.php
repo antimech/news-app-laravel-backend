@@ -27,4 +27,15 @@ class ArticleControllerTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function test_destroy(): void
+    {
+        $article = Article::factory()->create();
+
+        $this->actingAs($article->author);
+
+        $response = $this->delete('/api/articles/' . $article->id);
+
+        $response->assertNoContent();
+    }
 }

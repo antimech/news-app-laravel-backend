@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,7 +22,8 @@ class ArticleFactory extends Factory
         return [
             'title' => $title,
             'content' => fake()->paragraph(),
-            'image' => fake()->image('storage/app/public/images', fullPath: false, word: $title)
+            'image' => fake()->image('storage/app/public/images', fullPath: false, word: $title),
+            'user_id' => User::factory()
         ];
     }
 }

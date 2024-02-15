@@ -15,6 +15,7 @@ class ArticleTest extends TestCase
         $article = Article::factory()->create();
         $user = User::findOrFail($article->user_id);
 
+        $this->assertInstanceOf(User::class, $article->author);
         $this->assertTrue($article->author->id === $user->id);
     }
 

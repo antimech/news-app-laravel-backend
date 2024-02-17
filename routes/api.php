@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\LikeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('articles', ArticleController::class)
         ->only(['destroy']);
+
+    Route::post('articles/{article}/like', [LikeController::class, 'store']);
+    Route::delete('articles/{article}/like', [LikeController::class, 'destroy']);
 });
 
 

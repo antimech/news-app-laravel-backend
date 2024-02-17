@@ -23,7 +23,9 @@ class ArticleControllerTest extends TestCase
 
         $response = $this->get('/api/articles');
 
-        $response->assertOk();
+        $response
+            ->assertOk()
+            ->assertSee($articles[0]->title);
     }
 
     public function test_show(): void
@@ -36,7 +38,9 @@ class ArticleControllerTest extends TestCase
 
         $response = $this->get('/api/articles/' . $article->id);
 
-        $response->assertOk();
+        $response
+            ->assertOk()
+            ->assertSee($article->title);
     }
 
     public function test_destroy(): void

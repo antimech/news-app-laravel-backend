@@ -48,6 +48,14 @@ class Article extends Model
     }
 
     /**
+     * Get the comments of the article.
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(ArticleComment::class);
+    }
+
+    /**
      * Get the full URL to the image.
      */
     protected function imageUrl(): Attribute

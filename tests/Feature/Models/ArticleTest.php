@@ -3,6 +3,7 @@
 namespace Tests\Feature\Models;
 
 use App\Models\Article;
+use App\Models\ArticleComment;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -25,5 +26,22 @@ class ArticleTest extends TestCase
         $expectedUrl = asset('storage/images/' . $article->image);
 
         $this->assertSame($expectedUrl, $article->image_url);
+    }
+
+    public function test_an_article_have_comments()
+    {
+        // Create an article
+        $article = Article::factory()->create();
+
+        // Create some comments associated with the article
+        $articleComments = ArticleComment::factory(3)->for($article)->create();
+
+        // Ensure the "comments" relationship returns the correct number of comments
+        $this->assertEquals($articleComments->count(), $article->comments()->count());
+
+        // Ensure each comment is an instance of ArticleComment
+        foreach ($article->comments as $comment) {
+            $this->assertInstanceOf(ArticleComment::class, $comment);
+        }
     }
 }

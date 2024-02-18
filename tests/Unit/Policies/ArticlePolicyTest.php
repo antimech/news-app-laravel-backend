@@ -34,7 +34,7 @@ class ArticlePolicyTest extends TestCase
         $this->assertTrue($policy->viewAny($user));
     }
 
-    public function test_user_can_view_article()
+    public function test_user_can_view_an_article()
     {
         // Create an article
         $article = Article::factory()->create();
@@ -52,7 +52,7 @@ class ArticlePolicyTest extends TestCase
         $this->assertTrue($policy->view($user, $article));
     }
 
-    public function test_unauthenticated_user_can_view_article()
+    public function test_unauthenticated_user_can_view_an_article()
     {
         // Create an article
         $article = Article::factory()->create();
@@ -97,7 +97,7 @@ class ArticlePolicyTest extends TestCase
         $this->assertTrue($policy->delete($user, $article));
     }
 
-    public function test_user_cannot_delete_other_users_article()
+    public function test_user_cannot_delete_other_users_articles()
     {
         // Create two users
         $user1 = User::factory()->create();

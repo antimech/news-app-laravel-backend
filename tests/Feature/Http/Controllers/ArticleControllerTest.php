@@ -10,9 +10,6 @@ use Tests\TestCase;
 
 class ArticleControllerTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
     public function test_index(): void
     {
         // Assuming authorization policy tests cover this scenario, so we don't test it here.

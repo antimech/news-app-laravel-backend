@@ -38,5 +38,3 @@ Route::middleware(['auth:sanctum'])->group(function () {
         ->shallow()
         ->only(['store', 'destroy']);
 });
-
-

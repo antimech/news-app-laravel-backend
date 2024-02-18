@@ -29,7 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 
     Route::apiResource('articles', ArticleController::class)
-        ->only(['destroy']);
+        ->only(['store', 'destroy']);
 
     Route::post('articles/{article}/like', [LikeController::class, 'store']);
     Route::delete('articles/{article}/like', [LikeController::class, 'destroy']);

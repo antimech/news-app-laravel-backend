@@ -67,4 +67,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(ArticleComment::class);
     }
+
+    /**
+     * Check whether the user is considered the admin.
+     */
+    public function isAdministrator(): bool
+    {
+        return $this->email === config('admin.email');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Policies;
 
+use Illuminate\Support\Facades\Config;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Article;
@@ -63,6 +64,21 @@ class ArticlePolicyTest extends TestCase
         $this->assertTrue($policy->view(null, $article));
     }
 
+    public function test_user_cannot_create_articles()
+    {
+        // Create a user
+        $user = User::factory()->create();
+
+        // Mock the user
+        $this->actingAs($user);
+
+        // Create an instance of the policy
+        $policy = new ArticlePolicy();
+
+        // Check if the user can delete their own article
+        $this->assertFalse($policy->create($user));
+    }
+
     public function test_user_can_delete_own_article()
     {
         // Create a user
@@ -98,5 +114,32 @@ class ArticlePolicyTest extends TestCase
 
         // Check if user2 can delete user1's article
         $this->assertFalse($policy->delete($user2, $article));
+    }
+
+    public function test_user_did_not_pass_admin_check()
+    {
+        // Create a user
+        $user = User::factory()->create();
+
+        // Create an instance of the policy
+        $policy = new ArticlePolicy();
+
+        // Check if the user can view the published article
+        $this->assertNull($policy->before($user, ''));
+    }
+
+    public function test_an_admin_can_do_anything()
+    {
+        // Create a user
+        $user = User::factory()->create();
+
+        // Fake the config
+        Config::set('admin.email', $user->email);
+
+        // Create an instance of the policy
+        $policy = new ArticlePolicy();
+
+        // Check if the user can do anything
+        $this->assertTrue($policy->before($user, ''));
     }
 }

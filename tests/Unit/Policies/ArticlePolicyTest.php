@@ -34,6 +34,18 @@ class ArticlePolicyTest extends TestCase
         $this->assertTrue($policy->viewAny($user));
     }
 
+    public function test_unauthenticated_user_can_view_an_article()
+    {
+        // Create an article
+        $article = Article::factory()->create();
+
+        // Create an instance of the policy
+        $policy = new ArticlePolicy();
+
+        // Check if the user can view the published article
+        $this->assertTrue($policy->view(null, $article));
+    }
+
     public function test_user_can_view_an_article()
     {
         // Create an article
@@ -50,18 +62,6 @@ class ArticlePolicyTest extends TestCase
 
         // Check if the user can view the published article
         $this->assertTrue($policy->view($user, $article));
-    }
-
-    public function test_unauthenticated_user_can_view_an_article()
-    {
-        // Create an article
-        $article = Article::factory()->create();
-
-        // Create an instance of the policy
-        $policy = new ArticlePolicy();
-
-        // Check if the user can view the published article
-        $this->assertTrue($policy->view(null, $article));
     }
 
     public function test_user_cannot_create_articles()

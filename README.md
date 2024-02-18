@@ -58,28 +58,44 @@ Skip this step if you want to use SQLite. Otherwise, update the configuration ac
 ```
 
 
-#### 5. Create a symbolic link from `public/storage` to `storage/app/public`:
+#### 5. Configure admin:
+
+For security measures, admin permissions are disabled by default. To enable, set the admin's email address in `.env` file:
+
+```diff
+- ADMIN_EMAIL=
++ ADMIN_EMAIL=test@example.com
+```
+
+
+#### 6. Create a symbolic link from `public/storage` to `storage/app/public`:
 
 ```shell
 php artisan storage:link
 ```
 
 
-#### 6. Run migrations and seeders to set up your database:
+#### 7. Run migrations and seeders to set up your database:
 
 ```shell
 php artisan migrate --seed
 ```
 
 
-#### 7. Serve the application:
+#### 8. Serve the application:
 
 ```shell
 php artisan serve
 ```
 
 
-#### 8. Access your application at http://localhost:8000 in your web browser.
+#### 9. Access your application:
+
+Open http://localhost:8000 in your web browser. Also, take a look at the list of available API endpoints:
+
+```shell
+php artisan route:list
+```
 
 
 ## Testing
@@ -90,4 +106,4 @@ To run the automated tests for this project, execute the following command:
 php artisan test
 ```
 
-This will run all the tests defined in the tests directory.
+This will run all the tests defined in the `tests` directory.
